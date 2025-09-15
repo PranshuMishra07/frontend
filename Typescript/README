@@ -1,0 +1,535 @@
+Typescript is a programming language created at microsoft to addresh shortcomings of javascript
+Typescript is build on top of the JS, so every js file is valid typescript
+It offers sttic typed languages
+In Typescript we declare our variable type at run time and pass the file to the typescript compliler
+typescript=js+ strong type check
+
+Benifits It provides
+1.Static Typed
+2.Code Complition
+3.Shorthand notation
+4.Refactoring
+
+Drawbacks
+1.Compilation involve
+2.More Discipline is required 3.
+
+=>Installation of typescript
+npm i -g typescript
+
+=> to get the versions
+tsc -v
+
+Configuration file for typescript compiler
+tsc --init =>it will create tsconfig.json
+
+after setting rootdir and outdir in jsconfig you can run the program directly by using
+tsc
+
+Programming languages divide into two categories: statically-typed and dynamically-
+typed.
+• In statically-typed languages (eg C++, C#, Java, etc), the type of variables is set at
+compile-time and cannot change later.
+• In dynamically-typed languages (eg Python, JavaScript, Ruby), the type of variables is
+determined at run-time and can change later.
+• TypeScript is essentially JavaScript with static typing and some additional features that
+help us write more concise and robust code.
+With TypeScript we can catch more bugs at compile time.
+• Browsers don’t understand TypeScript code. So we need to use the TypeScript compiler
+to compile and translate (or transpile) our TypeScript code into regular JavaScript for
+execution by browsers.
+• Source maps are files that represent the mapping between TypeScript and JavaScript
+code. They’re used for debugging.
+• We can configure the TypeScript compiler by enabling/disabling various settings in
+tsconfig.json
+
+Types in typescript
+apart from 8 type supported by JS i.e
+1.number
+2.string
+3.boolean
+4.undefined
+5.bigint
+6.null
+7.symbol
+8.object
+
+9.Any
+10.Unknown
+11.never
+12.enum
+13.tuple
+
+example number
+let sales:number=123456
+let couce:string='cource';
+let is_published:boolean=true;
+
+let level:any
+level=number or string at any point of the time.
+
+example arrays
+let age number[] =[1,2,3,4,5];
+
+example tuples->fixed length array which is having each element type defined
+
+let user:[number, string]=[10, 'pranshu'];
+user[0]=>number
+user[1]=>string
+
+//array.push is problem as of currentlt in typescript
+
+enums -> list of releated constants
+example
+const enum Size {Small='s', Medium='m', large=}
+by default 0,,,1.2
+
+let mySize:Size =Size.Medium
+
+function in typescript
+function calculateTax(income:number, taxYear?:number):void{
+return 0;
+}
+
+object in typescript
+let exmplyee:{
+readonly id:number,
+name?:string,
+retire:(date: Date) =>void
+} ={ id:1, name:'', retire:(datte:Date)=> {console.log(date)} };
+
+Advance types in typescript
+
+1.type alias
+
+example
+
+type Emplyee ={
+readonly id:number,
+name?:string,
+retire:(date: Date) =>void  
+}
+
+let exmplyee: Emplyee={ id:1, name:'', retire:(datte:Date)=> {console.log(date)} };
+
+2.Union ==> one or more types using |
+
+function kgToLbs(weight:number | string):number {
+//Narowing
+if(typeof weight ==='number')
+return weight\*2.2;
+else
+return parseInt(2.2)
+}
+
+3.Intersaction type using &
+
+type Draggable ={
+drag:()=>void
+}
+
+type Resizeable = {
+resize:()=>void
+}
+
+type UIWidget = Draggable & Resizeable
+
+let textBox:UIWidget ={
+drag:()=> {}
+resize:()=> {}
+}
+
+3. literlas type to limit the value
+   type Quantity = 50 | 100;
+   let quantity : 50 | 51 = 50;
+
+4. nullable type ->
+   In TypeScript, "nullable types" refer to types that can explicitly hold null or undefined values in addition to their primary type. This behavior is primarily controlled by the strictNullChecks compiler option.
+
+function greet(name:string | null | undefined) {
+console.log(name.toUpperCase())
+}
+
+greet(null | undefined);
+
+Optional property acess operator**\*\*\*** object?.objectmember
+Optional element access operator**\*\*\*** array?.[0]
+Optional call operator function?.()
+
+5.Nullis coaelasing operator
+let speed:number | null =null;
+let ride ={
+Falsy (undefined, null, '', false, 0)
+speed : speed || 30
+}
+
+let ride ={
+Falsy (undefined, null, '', false, 0)
+speed : speed ?? 30
+}
+
+6.type assertion ->when we know more about type than compiler
+using 'as' operator
+
+let phone = document.getElelementById('phone') as HTMLInputElecment;
+
+or
+let phone = <HTMLInputElecment> document.getElelementById('phone' );
+
+7.Unknown type
+
+type of unknown is prefered over any type
+
+8.never // no value or never return
+
+function processEvents():never {
+while(1){
+
+    }
+
+}
+
+Object oriented programing in JS
+
+1.Creating classes in typescriipt
+
+ex:
+
+class Account {
+id:number;
+owner:string;
+balance:number;
+
+    constructor(id:number, owner:string, balance:number) {
+    this.id=id;
+    thid.owner=owner;
+    this.balance=balance;
+    }
+
+    deposite(amount:number):void {
+        if(amount<= 0>){
+            throw new Error('Faltu error');
+            this.balance+=amount;
+        }
+    }
+
+}
+
+let account = new Account(1,pranshu,500);
+account.deposite(100);
+console.log(account.balance);
+
+readonly property in class
+
+class Account {
+readonly
+id:number;
+owner:string;
+balance:number;
+nickname?:string;
+
+    constructor(id:number, owner:string, balance:number) {
+    this.id=id;
+    thid.owner=owner;
+    this.balance=balance;
+    }
+
+    deposite(amount:number):void {
+        if(amount<= 0>){
+            throw new Error('Faltu error');
+            this.balance+=amount;
+        }
+    }
+
+}
+
+Access Modifiers
+
+1.public // by default
+2.private // only access within the class only , you can not directly modify it or read it , bydefault we use \_Name , it can be apllied to method as well
+3.protected
+
+Easiest way to create property in typescript
+
+class Account {
+constructor( pubic readonly id:number, public owner:string, private balance:number) {
+this.id=id;
+thid.owner=owner;
+this.balance=balance;
+}
+
+    deposite(amount:number):void {
+        if(amount<= 0>){
+            throw new Error('Faltu error');
+            this.balance+=amount;
+        }
+    }
+
+}
+
+Getter and Setter // better ways to set and get values
+
+class Account {
+
+    constructor( pubic readonly id:number, public owner:string, private balance:number) {
+    this.id=id;
+    thid.owner=owner;
+    this.balance=balance;
+    }
+
+    deposite(amount:number):void {
+        if(amount<= 0>){
+            throw new Error('Faltu error');
+            this.balance+=amount;
+        }
+    }
+
+    get balance () :number  {
+        return this._balance;
+    }
+
+    set balance(value:number) {
+        if(values <0)
+        throw new Error('Invalid balance);
+    }
+
+}
+
+let account = new Account(1,'Pranshu', 0);
+console.log(account.balance);
+account.balance = 1;
+
+Index Signature property// to add propety dynamically
+
+class SeatAssignment {
+[seatNumber:string] :string;
+
+}
+
+let seats =new SeatAssignment();
+seats.A1='pranshu';
+seats.A2='prince';
+
+or
+seats['A1']='pranshu';
+
+Static members // static property are property which belongs to class rathar than object
+
+class Ride {
+
+activeRides:number =0;
+start() {this.activeRides ++ ;}
+stop() {this.activeRides--;}
+
+}
+
+let ride1=new Ride();
+ride1.start();
+
+let ride2=new Ride();
+ride2.start();
+
+console.log(ride2.activeRides); //1
+console.log(ride1.activeRides); //1
+
+Solutions
+
+class Ride {
+
+static activeRides:number =0;
+start() {Ride.activeRides ++ ;}
+stop() {Ride.activeRides--;}
+////
+notice
+
+}
+
+let ride1=new Ride();
+ride1.start();
+
+let ride2=new Ride();
+ride2.start();
+
+console.log(Ride.activeRides); // 2
+problem in this code
+we can directly modify it
+i.e
+
+Ride.activeRides=10;
+
+Solutions
+//
+class Ride {
+
+static activeRides:number =0;
+start() {Ride.activeRides ++ ;}
+stop() {Ride.activeRides--;}
+
+static get activeRides() {
+return Ride.\_activeRides;
+}
+Ride.activeRides =10;
+}
+
+Inheritance in typescript
+
+class Person {
+constructor(public firstName:string, public lastname:string){
+
+    }
+
+    get fullname() {
+        return this.firstname +'' + this.lastname;
+    }
+
+
+    walk() {
+        console.log('walkng';)
+    }
+
+}
+
+class Student extends Person {
+constructor(public studenId:number, firstName:string, latname:string){
+super(firstnme, lastname){
+
+        }
+
+    }
+
+    takeTest() {
+               console.log('walkng';)
+
+    }
+
+}
+
+let student = new Student(1,'John', 'john@gmail.com')
+
+Method overriding//
+
+class Teacher extends Person {
+constructor(firstName:string, latname:string){
+super(firstnme, lastname){
+
+        }
+
+    }
+
+    override get fullname() {
+        return 'Professer' + super.fullName;
+    }
+    //with or without override
+
+}
+
+Polyformism example
+
+printNames([
+newSudent(1, 'John', 'Smith');
+newTeacher(1, 'John', 'Smith')
+])
+
+function printNames(people:Person[]){
+for(let person of people){
+console.log(person.fullName)
+}
+}
+
+Open closed Principle
+
+Classes should be open for extension and closed for modifications
+
+Private vs Protected memebers
+
+Protected memebers are inheriteted but private memebr are not.
+
+Abstract class
+
+class Shape {
+constructor(public color:string) {
+
+    }
+
+    render() {
+
+    }
+
+}
+
+class Cirle extends Shape {
+constructor(public radius:number, color:string){
+super(color);
+}
+
+    override render():void {
+        console.log('rendering)
+    }
+
+}
+
+like that we can have class fortriangle and Rectamgle
+problem
+
+if we want object to be created for certain class we must mark that as abstract class, like Shape class in our case , we
+do not require it to be intitated as render for shape doe's make any sense.
+
+To acieve that we must mark the class as abstract
+
+abstract class Shape {
+constructor(public color:string) {
+
+    }
+
+    render() {
+
+    }
+
+}
+
+class Cirle extends Shape {
+constructor(public radius:number, color:string){
+super(color);
+}
+
+    override render():void {
+        console.log('rendering)
+    }
+
+}
+
+abstract methods are similiar to abstract class, for abstrat method to have we must have abstract class
+
+Interface -> to define the interface or shape of an object // to check typecheck only
+
+abstruct class Calender {
+constructor (public name:string) {
+
+    }
+
+    abstract addEvent():void
+    abstract removeEvent(): void
+
+}
+
+similiar
+interface Calendar {
+name:String;
+addEvent():void;
+removeEvent():void;
+}
+
+when no logic is there use interface or else use abstract class
+
+similiarly we can use inheritance here
+
+using interfce
+
+class GoogleCalander implements Calander {
+name:String;
+constructor(public name:string){
+
+}
+abstract addEvent():void
+abstract removeEvent(): void
+}
