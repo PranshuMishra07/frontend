@@ -533,3 +533,109 @@ constructor(public name:string){
 abstract addEvent():void
 abstract removeEvent(): void
 }
+
+Genersis
+
+class KeyPairValueNumber {
+constructor(public key:number, public value: string )
+}
+
+class KeyPairValueString {
+constructor(public key:string, public value: string )
+}
+
+let pair =new KeyPairValueNumber(1, 'Apple');
+let pair =new KeyPairValueString('1', 'Apple');
+
+Solutioin
+
+class KeyPairValueGeneric<T> {
+constructor(public key:T, public value: string )
+}
+
+let pair =new KeyPairValueGeneric<Sting> ('1', 'Apple');
+let pair =new KeyPairValueGeneric<Number> (1, 'Apple');
+
+another example
+class KeyPairValueGeneric<K,V> {
+constructor(public key:T, public value: V )
+}
+let pair =new KeyPairValueGeneric<Number, String> (1, 'Apple');
+
+function wrapInArray<T>(value:number) {
+return [value];
+}
+
+let numbers = wrapInArray('1');
+
+Generic Intefaces
+
+inteface Results <T> {
+data: T,
+erorr:String|null
+}
+
+function fetch<T> (url:string) Result <T > {
+return {data, error:null};
+}
+
+interface User {
+username:string,
+}
+
+interface Product {
+title:string,
+}
+
+let result =fetch<User>('url)
+
+Generic Constraint
+
+function echo <T extends number| string>(value:T):T {
+return value;
+}
+
+or
+
+function echo <T extends {name:string}>(value:T):T {
+return value;
+}
+
+or
+
+inface Person {
+name:string;
+}
+
+function echo <T extends Person >(value:T):T {
+return value;
+}
+
+Extending class and Generic
+
+inerface Product {
+namr:String,
+price:number,
+}
+
+class Store <T> {
+private \_object:T[] =[];
+
+    add (obj:T ) :void {
+    this.object.push(obj);
+    }
+
+}
+
+1.  class CompressibleStore<T> extends Store<T> {
+    compress(){}
+    }
+
+let store= new CompressibleStore<Product>();
+store.compress();
+
+class SearchableStore<T extends {name:string}> extends Store<T> {
+
+}
+
+Decoraters -Atrributes we are applying properties to the classes and method and with we can change how they behave.
