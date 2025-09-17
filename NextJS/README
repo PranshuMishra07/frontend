@@ -1,0 +1,81 @@
+A framework for building fast and search-engine-friendly aplications.
+It commes with compiler, CLI , Node.js runtime
+
+npx create-next-app@latest projectname
+
+Routing in Nextjs is based on file system
+
+ex
+app
+users
+page.tsx(lower case based on convection)
+any other file in the location is not accesible
+similiar way you can create nested routing as well
+
+creating navigation , do't reload all the app
+use link
+
+<Link href="/test/something">User </Link>
+
+Client and Server Component
+
+client side rendering
+1.large bundles
+2.resource intensive
+3.no seo
+4.less secure //api keys are exposed to client
+
+\*\*server components cannot listen to browser events ,access browser apis, useEffects
+so default to servver components
+and use as less client as possible
+
+try to add interactivity on server component will thow runtime error
+so there are two ways we can add make any component client side
+1.use client -> to make wbole componet 2. seperate it and import it, make this client component
+
+Data fetching
+1.on clinet ->useState +useEffect, extra round trip to server
+2.on server ->
+fetch('url').(then => res.json()).then(map the data);
+
+or
+
+const UsersPagr= async () => {
+const res = await fetch('dfnsnfsdnfksnd');
+const users = await res.json();
+
+    return (
+        <>
+        {users.map(item=>item.name)}
+        </>
+    )
+
+}
+
+memory (fast)
+file system
+network (slow)
+
+Caching, build in caching based 0n file system , while usig fetch
+
+setting cache
+const res = await fetch('dfnsnfsdnfksnd', {cache:'no-store});
+
+Static site generation and dynamic rendering
+Static site generation only render once, next time fetch without rerender(can check with time stamp, can't see this behviour in development applicable to production )
+ceck with npm rurn build
+circle means static
+
+Styling in Next.js
+1.Global style
+
+use styles that are true in global, not for components
+
+2.CSS Modules
+a css file that is scoped to a componet/page
+
+Extension fileName.module.css
+similir to react native
+
+3.Tailwind css
+uses concept of utility classes
